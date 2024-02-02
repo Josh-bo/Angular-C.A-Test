@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid text-info text-center mt-5 pt-5" >
+    <div class="d-flex justify-content-between">
+        <div class="fs-5 fw-bold">
+           ADMIN DASHBOARD
+        </div>
+     
+        <button class="btn btn-danger" (click)="logout()">
+           LOG-OUT
+        </button>
+    </div>
+</div><hr>
+
+<table class="table table-responsive text-center">
+    <tbody>
+        <tr>
+            <th>S/N</th>
+            <th>FULL-NAME</th>
+            <th>E-MAIL</th>
+            <th>PHONE-NUMBER</th>
+            <th>AGE</th>
+            <th>STUDENT_ID</th>
+            <th>OPTION</th>
+            <th>ACTION</th>
+        </tr>
+
+        <tr *ngFor="let item of allStudents, let i = index">
+            <td>{{i +1}}</td>
+            <td>{{item.fullName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phoneNumber}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.student_Id}}</td>
+            <td>{{item.option}}</td>
+            <button class="btn btn-dange">DELETE</button>
+        </tr>
+    </tbody>
+</table>

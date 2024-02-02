@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 interface eachUserDetails {
   fullName : string;
@@ -19,13 +20,13 @@ interface eachUserDetails {
 @Component({
   selector: 'app-student-sign-up',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, NavbarComponent],
   templateUrl: './student-sign-up.component.html',
   styleUrl: './student-sign-up.component.css'
 })
 export class StudentSignUpComponent {
 
-  constructor(public routes : Router ){}
+  constructor(public navigate : Router ){}
 
   public fullName : string = "";
   public email : string = "";
@@ -38,6 +39,7 @@ export class StudentSignUpComponent {
   public password : string = "";
   public message : string = "";
   public allStudentArray : eachUserDetails [] = [];
+  public confirm: boolean = false
 
 
 
@@ -55,18 +57,18 @@ export class StudentSignUpComponent {
     }
 
     this.allStudentArray = [...this.allStudentArray, userObj]
-    console.log(this.allStudentArray);
-  
-
+    
     
     if(this.allStudentArray){
-     localStorage.setItem("Crown", JSON.stringify(this.allStudentArray));
-      this.routes.navigate(['/sigIn'])
+      localStorage.setItem("Crown", JSON.stringify(this.allStudentArray));
+      this.navigate.navigate(['/signIn']);
    }
    else{
+    this.confirm = true;
     this.message = "Registration is not successful !"
     setTimeout(() => {
       this.message = ""
+      this.confirm = false;
     }, 3000)
    }
 
