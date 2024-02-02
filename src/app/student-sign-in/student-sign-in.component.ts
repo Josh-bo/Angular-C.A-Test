@@ -17,6 +17,7 @@ export class StudentSignInComponent {
   public email : string = "";
   public confirm: boolean = false
   public error: string = ""
+  public currentUserArray : any = []
 
 
 
@@ -37,7 +38,8 @@ export class StudentSignInComponent {
       }, 3000)
     }
     else{
-      localStorage.setItem("CurrentUser", JSON.stringify(newUser))
+      this.currentUserArray = [...this.currentUserArray, newUser]
+      localStorage.setItem("CurrentUser", JSON.stringify(this.currentUserArray))
 
       if(newUser.option === "Admin"){
         this.route.navigate(['/dashboard'])

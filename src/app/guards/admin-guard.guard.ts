@@ -7,15 +7,16 @@ export const adminGuardGuard: CanActivateFn = (route, state) => {
   if (localStorage['CurrentUser']) {
     const getAdmin = JSON.parse(localStorage['CurrentUser']);
   
-    // Check if getAdmin is an array before using find
     if (Array.isArray(getAdmin)) {
       let newStudents = getAdmin.find((select : any, i : number) => select.option == "Admin");
       console.log(newStudents);
     } else {
       console.error("CurrentUser is not an array");
+      routing.navigate(['/signIn'])
     }
   } else {
     console.error("CurrentUser not found in localStorage");
+    routing.navigate(['/signIn'])
   }
   
 
